@@ -179,7 +179,13 @@ class ParserHelper
                     $v = self::nodesToDict($node['children']);
                 } elseif (strlen($k) <= $maxKeyLength) {
                     $v = array_merge([$v], $node['children']);
-                    $v = array_map('trim', $v);
+                    $v = array_map(function ($v) {
+                        if (is_array($v)) {
+                            return $v;
+                        }else{
+                            return trim($v);
+                        }
+                    }, $v);
                     $v = array_filter($v, 'strlen');
                     $v = empty($v) ? [''] : $v;
                 } else {
@@ -211,7 +217,8 @@ class ParserHelper
      * @param string $header
      * @return array
      */
-    public static function dictToGroup($dict, $header = '$header') {
+    public static function dictToGroup($dict, $header = '$header')
+    {
         if (empty($dict) || count($dict) > 1) {
             return $dict;
         }
@@ -232,7 +239,8 @@ class ParserHelper
      * @param array $groups
      * @return array
      */
-    public static function joinParentlessGroups($groups) {
+    public static function joinParentlessGroups($groups)
+    {
         $lastGroup = null;
         foreach ($groups as &$group) {
             if (count($group) == 1 && is_string(key($group)) && reset($group) === false) {
@@ -256,7 +264,7 @@ class ParserHelper
     public static function parseStates($rawstates, $removeExtra = true)
     {
         $states = [];
-        $rawstates = is_array($rawstates) ? $rawstates : [ strval($rawstates) ];
+        $rawstates = is_array($rawstates) ? $rawstates : [strval($rawstates)];
         foreach ($rawstates as $rawstate) {
             if (preg_match('/^\s*((\d{3}\s+)?[a-z]{2,}.*)\s*/ui', $rawstate, $m)) {
                 $state = mb_strtolower($m[1]);
