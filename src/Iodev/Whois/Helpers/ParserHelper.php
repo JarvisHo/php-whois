@@ -179,14 +179,8 @@ class ParserHelper
                     $v = self::nodesToDict($node['children']);
                 } elseif (strlen($k) <= $maxKeyLength) {
                     $v = array_merge([$v], $node['children']);
-                    $v = array_map(function ($v) {
-                        if (is_array($v)) {
-                            return $v;
-                        }else{
-                            return trim($v);
-                        }
-                    }, $v);
-                    $v = array_filter($v, 'strlen');
+                    $v = @array_map('trim', $v);
+                    $v = @array_filter($v, 'strlen');
                     $v = empty($v) ? [''] : $v;
                 } else {
                     $kv = [$node['line']];
