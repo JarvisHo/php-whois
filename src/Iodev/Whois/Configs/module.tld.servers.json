@@ -513,7 +513,7 @@
   {"zone": ".one", "host": "whois.nic.one"},
   {"zone": ".ong", "host": "whois.publicinterestregistry.net"},
   {"zone": ".onl", "host": "whois.afilias-srs.net"},
-  {"zone": ".online", "host": "whois.centralnic.com"},
+  {"zone": ".online", "host": "whois.godaddy.com"},
   {"zone": ".ooo", "host": "whois.nic.ooo"},
   {"zone": ".org", "host": "whois.pir.org"},
   {"zone": ".org", "host": "whois.publicinterestregistry.net"},
