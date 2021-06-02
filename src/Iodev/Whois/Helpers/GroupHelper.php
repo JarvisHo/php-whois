@@ -132,7 +132,7 @@ class GroupHelper
     {
         array_walk_recursive($subsets, function(&$val) use ($params) {
             $origVal = (string)$val;
-            $val = preg_replace_callback('~\\$[a-z][a-z\d]*\b~ui', function($m) use ($origVal, $params) {
+            $val = @preg_replace_callback('~\\$[a-z][a-z\d]*\b~ui', function($m) use ($origVal, $params) {
                 $arg = $m[0];
                 $newVal = isset($params[$arg]) ? $params[$arg] : $arg;
                 if (strlen($origVal) > 1 && $origVal[0] == '~') {
