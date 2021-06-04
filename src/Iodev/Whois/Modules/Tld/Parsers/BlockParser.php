@@ -421,7 +421,8 @@ class BlockParser extends CommonParser
             return 0;
         }
         foreach ($sel->getAll() as $str) {
-            if (preg_match($fallbackRegex, $str)) {
+            if(!is_string($str)) continue;
+            if (@preg_match($fallbackRegex, $str)) {
                 $time = DateHelper::parseDateInText($str);
                 if (!empty($time)) {
                     return $time;
